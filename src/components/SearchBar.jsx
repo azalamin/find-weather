@@ -14,7 +14,15 @@ const SearchBar = () => {
 			toast.warn("Please enter your location");
 		}
 		if (searchTerm !== "") {
-			fetchCurrentWeather(searchTerm);
+			const data = fetchCurrentWeather(searchTerm);
+			data
+				.then(result => {
+					console.log(result);
+					toast.success("Result found");
+				})
+				.catch(err => {
+					toast.error("Result not found");
+				});
 		}
 	};
 
