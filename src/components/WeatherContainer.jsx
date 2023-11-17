@@ -1,15 +1,18 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import CurrentWeather from "./CurrentWeather";
 import SearchBar from "./SearchBar";
 
 const WeatherContainer = () => {
+	const [isWeatherAvailable, setIsWeatherAvailable] = useState(true);
 	return (
-		<Box
-			sx={{
-				padding: "2rem",
-			}}
-		>
-			<SearchBar />
+		<Box>
+			<Box>
+				<SearchBar setIsWeatherAvailable={setIsWeatherAvailable} />
+			</Box>
+			<Box>
+				<Box>{isWeatherAvailable && <CurrentWeather />}</Box>
+			</Box>
 		</Box>
 	);
 };

@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "../styles/SearchBar.css";
 import { fetchCurrentWeather } from "../utils/apiCalls";
+import WeatherCard from "./WeatherCard";
 
-const SearchBar = () => {
+const SearchBar = ({ setIsWeatherAvailable }) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [weatherData, setWeatherData] = useState(null);
 
@@ -17,8 +18,9 @@ const SearchBar = () => {
 			const data = fetchCurrentWeather(searchTerm);
 			data
 				.then(result => {
-					console.log(result);
+					setWeatherData(result);
 					toast.success("Result found");
+					setIsWeatherAvailable(false);
 				})
 				.catch(err => {
 					toast.error("Result not found");
@@ -27,34 +29,37 @@ const SearchBar = () => {
 	};
 
 	return (
-		<Box
-			width='100%'
-			sx={{
-				display: "flex",
-				justifyContent: "center",
-			}}
-		>
-			<input
-				value={searchTerm}
-				id='searchInput'
-				placeholder='Enter your location'
-				onChange={event => setSearchTerm(event.target.value)}
-			/>
-			<Button
+		<Box>
+			<Box
+				width='100%'
 				sx={{
-					borderRadius: "10px",
+					display: "flex",
+					justifyContent: "center",
 				}}
-				variant='contained'
-				color='primary'
-				onClick={handleSearch}
+				paddingTop='3rem'
 			>
-				<SearchIcon
-					sx={{
-						fontSize: "30px",
-					}}
+				<input
+					value={searchTerm}
+					id='searchInput'
+					placeholder='Enter your location'
+					onChange={e => setSearchTerm(e.target.value)}
 				/>
-			</Button>
-			{/* {weatherData && <WeatherCard weatherData={weatherData} />} */}
+				<Button
+					sx={{
+						borderRadius: "10px",
+					}}
+					variant='contained'
+					color='primary'
+					onClick={handleSearch}
+				>
+					<SearchIcon
+						sx={{
+							fontSize: "30px",
+						}}
+					/>
+				</Button>
+			</Box>
+			{weatherData && <WeatherCard weatherData={weatherData} />}
 		</Box>
 	);
 };

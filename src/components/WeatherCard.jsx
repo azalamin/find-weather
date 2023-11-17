@@ -1,35 +1,46 @@
-import { Button, Card, CardActions, CardContent, Typography } from "@mui/material";
+import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 import React from "react";
 
-const WeatherCard = ({ location, temperature, humidity, windSpeed, iconURL }) => {
+const WeatherCard = ({ weatherData }) => {
+	const { name, main, wind } = weatherData;
+	console.log(weatherData);
 	return (
-		<Card
-			sx={{
-				width: "300px",
-				margin: "10px",
-				bgcolor: "#0000005e",
-				color: "#ffffff",
-			}}
-		>
-			<CardContent>
-				<Typography variant='h5'>{location}</Typography>
-				<img
-					src={iconURL}
-					alt='weather icon'
-					style={{
-						fontSize: "30px",
-					}}
-				/>
-				<Typography variant='subtitle1'>Temperature: {temperature}°C</Typography>
-				<Typography variant='subtitle1'>Humidity: {humidity}%</Typography>
-				<Typography variant='subtitle1'>Wind Speed: {windSpeed} km/h</Typography>
-			</CardContent>
-			<CardActions>
-				<Button size='small' color='primary'>
-					More Details
-				</Button>
-			</CardActions>
-		</Card>
+		<Box display='flex'>
+			<Card
+				sx={{
+					width: "300px",
+					bgcolor: "#0000005e",
+					color: "#ffffff",
+					height: "50vh",
+					marginTop: "3rem",
+					paddingX: "1.5rem",
+					paddingTop: "1.5rem",
+				}}
+			>
+				<CardContent>
+					<Typography variant='h4'>{name}</Typography>
+					<Typography variant='subtitle1'>Temperature: {main?.temp}°C</Typography>
+					<Typography variant='subtitle1'>Humidity: {main?.humidity}%</Typography>
+					<Typography variant='subtitle1'>Wind Speed: {wind?.speed} km/h</Typography>
+					<Typography variant='subtitle1'>Pressure: {main?.pressure}</Typography>
+					<Typography variant='subtitle1'>Max Temp: {main?.temp_max} °C</Typography>
+					<Typography variant='subtitle1'>Min Temp: {main?.temp_min} °C</Typography>
+				</CardContent>
+				<CardActions>
+					<Button size='small' color='primary'>
+						More Details
+					</Button>
+				</CardActions>
+			</Card>
+			<Box
+				sx={{
+					marginTop: "3rem",
+					marginLeft: "3rem",
+				}}
+			>
+				Hellow
+			</Box>
+		</Box>
 	);
 };
 
