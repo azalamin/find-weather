@@ -1,10 +1,16 @@
+import { Box } from "@mui/material";
 import React from "react";
+import SearchBar from "./SearchBar";
 
 const WeatherContainer = () => {
 	return (
-		<div>
-			<h3>Weather Container</h3>
-		</div>
+		<Box
+			sx={{
+				padding: "2rem",
+			}}
+		>
+			<SearchBar />
+		</Box>
 	);
 };
 

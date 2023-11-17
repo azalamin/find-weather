@@ -1,0 +1,12 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.App {
+	background-image: url("../images/bg-weather.jpg");
+	background-size: cover;
+	min-height: 104vh;
+	background-repeat: no-repeat;
+	background-position: center;
+}
