@@ -16,6 +16,10 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+.tb-color {
+	color: white !important;
+}
+
 @media screen and (max-width: 776px) {
 	#searchInput {
 		width: 80%;

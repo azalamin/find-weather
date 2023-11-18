@@ -6,7 +6,7 @@ import WeatherCard from "./WeatherCard";
 
 const CurrentWeather = () => {
 	const [weatherData, setWeatherData] = useState({});
-	const [forecastData, setForecastData] = useState({});
+	const [forecastData, setForecastData] = useState([]);
 
 	useEffect(() => {
 		const data = fetchCurrentWeather("Dhaka");

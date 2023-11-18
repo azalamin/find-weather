@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,10 +8,15 @@ import './styles/App.css';
 const App = () => {
 
   return (
-    <div className="App">
+    <Box className="App" sx={{
+      display: {
+        md: 'flex'
+      },
+      justifyContent: 'center'
+    }}>
       <WeatherContainer />
       <ToastContainer />
-    </div>
+    </Box>
   );
 }
 

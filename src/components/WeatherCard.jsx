@@ -4,15 +4,23 @@ import ForecastChart from "./ForecastChart";
 
 const WeatherCard = ({ weatherData, forecastData }) => {
 	const { name, main, wind } = weatherData;
-
 	return (
-		<Box display='flex'>
+		<Box
+			display={{
+				md: "flex",
+			}}
+		>
 			<Card
 				sx={{
-					width: "300px",
+					width: {
+						md: "300px",
+					},
 					bgcolor: "#0000005e",
 					color: "#ffffff",
-					height: "50vh",
+					minHeight: {
+						sm: "50vh",
+						xs: "30vh",
+					},
 					marginTop: "3rem",
 					paddingX: "1.5rem",
 					paddingTop: "1.5rem",
@@ -36,10 +44,19 @@ const WeatherCard = ({ weatherData, forecastData }) => {
 			<Box
 				sx={{
 					marginTop: "3rem",
-					marginLeft: "3rem",
+					marginBottom: {
+						md: "0rem",
+						xs: "2rem",
+					},
+					marginLeft: {
+						md: "3rem",
+					},
+					marginX: {
+						xs: "0.5rem",
+					},
 				}}
 			>
-				<ForecastChart />
+				<ForecastChart forecastData={forecastData} />
 			</Box>
 		</Box>
 	);

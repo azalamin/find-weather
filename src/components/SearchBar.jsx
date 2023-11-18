@@ -4,42 +4,50 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "../styles/SearchBar.css";
 import { fetchCurrentWeather, getFiveDayForecast } from "../utils/apiCalls";
+import LoadingIndicator from "./LoadingIndicator";
 import WeatherCard from "./WeatherCard";
 
 const SearchBar = ({ setIsWeatherAvailable }) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [weatherData, setWeatherData] = useState(null);
-	const [forecastData, setForecastData] = useState({});
+	const [forecastData, setForecastData] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const handleSearch = () => {
 		if (searchTerm === "") {
 			toast.warn("Please enter your location");
 		}
 		if (searchTerm !== "") {
+			setIsLoading(true);
 			const data = fetchCurrentWeather(searchTerm);
 			data
 				.then(result => {
 					setWeatherData(result);
 					toast.success("Result found");
 					setIsWeatherAvailable(false);
+					setIsLoading(false);
 				})
 				.catch(err => {
 					toast.error("Result not found");
+					setIsLoading(false);
 				});
 			const forecastsData = getFiveDayForecast(searchTerm);
+			setIsLoading(true);
 			forecastsData
 				.then(result => {
 					setForecastData(result);
+					setIsLoading(false);
 				})
 				.catch(err => {
 					toast.error("Forecast not found");
+					setIsLoading(false);
 				});
 		}
 	};
 
-	console.log(forecastData);
-
-	return (
+	return isLoading ? (
+		<LoadingIndicator isLoading={isLoading} />
+	) : (
 		<Box>
 			<Box
 				width='100%'
@@ -70,7 +78,7 @@ const SearchBar = ({ setIsWeatherAvailable }) => {
 					/>
 				</Button>
 			</Box>
-			{weatherData && <WeatherCard weatherData={weatherData} />}
+			{weatherData && <WeatherCard forecastData={forecastData} weatherData={weatherData} />}
 		</Box>
 	);
 };

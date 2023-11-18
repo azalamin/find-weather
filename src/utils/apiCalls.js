@@ -9,7 +9,7 @@ export const fetchCurrentWeather = async (location) => {
 
 export const getFiveDayForecast = async (location) => {
     const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}&units=metric`
     );
     // Extract the daily forecast data (every 8th entry in the list)
     const fiveDayForecast = response.data.list.filter((reading, index) => index % 8 === 0);
