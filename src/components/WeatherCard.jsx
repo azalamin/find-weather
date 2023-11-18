@@ -1,9 +1,10 @@
 import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 import React from "react";
+import ForecastChart from "./ForecastChart";
 
-const WeatherCard = ({ weatherData }) => {
+const WeatherCard = ({ weatherData, forecastData }) => {
 	const { name, main, wind } = weatherData;
-	console.log(weatherData);
+
 	return (
 		<Box display='flex'>
 			<Card
@@ -38,7 +39,7 @@ const WeatherCard = ({ weatherData }) => {
 					marginLeft: "3rem",
 				}}
 			>
-				Hellow
+				<ForecastChart />
 			</Box>
 		</Box>
 	);

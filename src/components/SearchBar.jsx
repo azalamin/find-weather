@@ -3,12 +3,13 @@ import { Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import "../styles/SearchBar.css";
-import { fetchCurrentWeather } from "../utils/apiCalls";
+import { fetchCurrentWeather, getFiveDayForecast } from "../utils/apiCalls";
 import WeatherCard from "./WeatherCard";
 
 const SearchBar = ({ setIsWeatherAvailable }) => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [weatherData, setWeatherData] = useState(null);
+	const [forecastData, setForecastData] = useState({});
 
 	const handleSearch = () => {
 		if (searchTerm === "") {
@@ -25,8 +26,18 @@ const SearchBar = ({ setIsWeatherAvailable }) => {
 				.catch(err => {
 					toast.error("Result not found");
 				});
+			const forecastsData = getFiveDayForecast(searchTerm);
+			forecastsData
+				.then(result => {
+					setForecastData(result);
+				})
+				.catch(err => {
+					toast.error("Forecast not found");
+				});
 		}
 	};
+
+	console.log(forecastData);
 
 	return (
 		<Box>
