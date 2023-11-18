@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Find Weather APP
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To visit live link [Click Here](https://find-weather-mu.vercel.app/).
 
 ## Available Scripts
 
